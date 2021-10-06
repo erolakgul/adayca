@@ -1,0 +1,48 @@
+﻿  #############################################
+  ------------------------------------------debugging lifetime-------------------------------------------------
+
+   html,css,js değişiklikleri o an için sayfaya yansımadğınından;
+       https://stackoverflow.com/questions/58700931/vs-2019-changes-not-visible-before-re-debugging-project
+
+       şuradaki adımları takiben, Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation paketi yüklenir.
+       startup.cs dosyasına => services.AddControllersWithViews().AddRazorRuntimeCompilation(); kodu eklenir
+       css js linklerine asp-append-version="true" bu kod parçası eklenir
+
+       <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+   ------------------------------------------------------------------------------------------------------
+
+
+   #############################################
+   ------------------------------------------logging----------------------------------------------
+   https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-5.0
+
+    program.cs         Logging için katmanda configure edildi
+    appsettings.json   Logging parametreleri eklendi
+    controller larda DI (Dependency Injection) yapıldı. 
+   
+    file logging => Install-Package Nlog, NLog.Web.AspNetCore ve NLog.extention.logging
+                     create log file nlog.config , check nlog file copy to output property, it must be copy always
+                     program cs .UseNLog() 
+                     startup addnlog
+                     configure nlog layout tag
+
+    remote ip => startup.cs e using Microsoft.AspNetCore.HttpOverrides eklendi
+
+   ------------------------------------------------------------------------------------------------------
+
+   
+   #############################################
+   ------------------------------------------caching----------------------------------------------
+   ICustomMemoryCache ve  CustomMemoryCache ile servisi oluşturuldu
+   startupta register edildi
+   controller larda dependency injection edildi.
+
+    ------------------------------------------------------------------------------------------------------
+
+   #############################################
+   ------------------------------------------appsettings----------------------------------------------
+   ICustomOptions ve  CustomOptions ile servisi oluşturuldu
+   startupta register edildi
+   controller larda dependency injection edildi. değer okuma ve değer değiştirme yapılabilir home controller
+
+    ------------------------------------------------------------------------------------------------------
